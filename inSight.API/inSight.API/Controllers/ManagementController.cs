@@ -44,10 +44,11 @@ namespace inSight.API.Controllers
                 })
                 .ToListAsync();
 
-            // Dohvati sve evaluacije za ovaj kvartal
+            // Dohvati sve evaluacije za ovaj kvartal SA ANSWERS
             var evaluations = await _context.Evaluations
                 .Where(e => e.QuarterId == quarterId)
                 .Include(e => e.EvaluatorUser)
+                .Include(e => e.Answers) // DODATO: uključi odgovore za računanje proseka
                 .ToListAsync();
 
             // Grupišemo evaluacije po evaluiranom korisniku
@@ -56,31 +57,55 @@ namespace inSight.API.Controllers
                 .ToDictionary(g => g.Key, g => g.ToList());
 
             // Kreiraj pregled za svaki zaposleni
-            var overview = employees.Select(emp => new
+            var overview = employees.Select(emp =>
             {
-                EmployeeId = emp.Id,
-                FullName = $"{emp.FirstName} {emp.LastName}",
-                emp.Email,
-                emp.Role,
-                Position = emp.Role, // Position je sada isto kao Role
-                emp.CurrentRank,
-                emp.TeamId,
-                emp.TeamName,
+                var userEvaluations = evaluationsByUser.ContainsKey(emp.Id)
+                    ? evaluationsByUser[emp.Id]
+                    : new List<Evaluation>();
 
-                // Statistika evaluacija
-                TotalEvaluations = evaluationsByUser.ContainsKey(emp.Id)
-                    ? evaluationsByUser[emp.Id].Count
-                    : 0,
-                CompletedEvaluations = evaluationsByUser.ContainsKey(emp.Id)
-                    ? evaluationsByUser[emp.Id].Count(e => e.IsCompleted)
-                    : 0,
-                PendingEvaluations = evaluationsByUser.ContainsKey(emp.Id)
-                    ? evaluationsByUser[emp.Id].Count(e => !e.IsCompleted)
-                    : 0,
+                // Računaj prosečan skor iz ANSWERS (realnije od OverallScore)
+                var completedEvaluations = userEvaluations.Where(e => e.IsCompleted).ToList();
+                decimal? averageScore = null;
 
-                // Lista evaluatora
-                Evaluators = evaluationsByUser.ContainsKey(emp.Id)
-                    ? evaluationsByUser[emp.Id].Select(e => new
+                if (completedEvaluations.Any())
+                {
+                    // Prolazi kroz sve završene evaluacije i prosek svih odgovora
+                    var allScores = new List<int>();
+                    foreach (var eval in completedEvaluations)
+                    {
+                        if (eval.Answers != null && eval.Answers.Any())
+                        {
+                            allScores.AddRange(eval.Answers.Select(a => a.Score));
+                        }
+                    }
+
+                    if (allScores.Any())
+                    {
+                        averageScore = (decimal)allScores.Average();
+                    }
+                }
+
+                return new
+                {
+                    EmployeeId = emp.Id,
+                    FullName = $"{emp.FirstName} {emp.LastName}", // Samo ime i prezime (BEZ EMAIL-a)
+                    emp.Email, // Ali držimo email u objektu za eventualne potrebe
+                    emp.Role,
+                    Position = emp.Role, // Position je sada isto kao Role
+                    emp.CurrentRank,
+                    emp.TeamId,
+                    emp.TeamName,
+
+                    // NOVA KOLONA: Prosečan skor
+                    AverageScore = averageScore,
+
+                    // Statistika evaluacija
+                    TotalEvaluations = userEvaluations.Count,
+                    CompletedEvaluations = completedEvaluations.Count,
+                    PendingEvaluations = userEvaluations.Count(e => !e.IsCompleted),
+
+                    // Lista evaluatora
+                    Evaluators = userEvaluations.Select(e => new
                     {
                         EvaluationId = e.Id,
                         EvaluatorName = $"{e.EvaluatorUser.FirstName} {e.EvaluatorUser.LastName}",
@@ -90,9 +115,11 @@ namespace inSight.API.Controllers
                         OverallScore = e.OverallScore,
                         CompletedAt = e.CompletedAt
                     }).Cast<object>().ToList()
-                    : new List<object>()
+                };
             })
-            .OrderBy(e => e.FullName)
+            // SORTIRAJ PO PROSEČNOM SKORU - descending (najviši prvo)
+            .OrderByDescending(e => e.AverageScore ?? 0) // null se tretira kao 0
+            .ThenBy(e => e.FullName) // Sekundarno sortiraj po imenu
             .ToList();
 
             return Ok(new
@@ -136,24 +163,24 @@ namespace inSight.API.Controllers
 
             // Dohvati sve evaluacije za ovog zaposlenog u ovom kvartalu
             var evaluations = await _context.Evaluations
-                .Where(e => e.EvaluatedUserId == employeeId && e.QuarterId == quarterId)
+                .Where(e => e.QuarterId == quarterId && e.EvaluatedUserId == employeeId)
                 .Include(e => e.EvaluatorUser)
                     .ThenInclude(u => u.SystemRole)
-                .Include(e => e.Quarter)
-                .OrderByDescending(e => e.CompletedAt)
+                .Include(e => e.EvaluatorUser)
+                    .ThenInclude(u => u.Role)
                 .Select(e => new
                 {
-                    EvaluationId = e.Id,
-                    EvaluatorId = e.EvaluatorUserId,
+                    e.Id,
                     EvaluatorName = $"{e.EvaluatorUser.FirstName} {e.EvaluatorUser.LastName}",
                     EvaluatorRole = e.EvaluatorUser.SystemRole != null ? e.EvaluatorUser.SystemRole.Name : "N/A",
-                    EvaluationType = e.EvaluationType.ToString(),
-                    QuestionnaireType = e.QuestionnaireType.ToString(),
-                    IsCompleted = e.IsCompleted,
-                    OverallScore = e.OverallScore,
-                    GeneralComment = e.GeneralComment,
-                    CompletedAt = e.CompletedAt,
-                    CreatedAt = e.CreatedAt
+                    EvaluatorPosition = e.EvaluatorUser.Role != null ? e.EvaluatorUser.Role.Name : "N/A",
+                    e.EvaluationType,
+                    e.QuestionnaireType,
+                    e.IsCompleted,
+                    e.OverallScore,
+                    e.GeneralComment,
+                    e.CompletedAt,
+                    e.CreatedAt
                 })
                 .ToListAsync();
 
@@ -248,41 +275,51 @@ namespace inSight.API.Controllers
                     evaluation.EvaluatorUser.Email,
                     Role = evaluation.EvaluatorUser.SystemRole != null ? evaluation.EvaluatorUser.SystemRole.Name : "N/A"
                 },
-                EvaluationType = evaluation.EvaluationType.ToString(),
-                QuestionnaireType = evaluation.QuestionnaireType.ToString(),
-                IsCompleted = evaluation.IsCompleted,
-                OverallScore = evaluation.OverallScore,
-                GeneralComment = evaluation.GeneralComment,
-                CompletedAt = evaluation.CompletedAt,
+                evaluation.EvaluationType,
+                evaluation.QuestionnaireType,
+                evaluation.IsCompleted,
+                evaluation.OverallScore,
+                evaluation.GeneralComment,
+                evaluation.CompletedAt,
                 Categories = categories
             });
         }
 
         // GET: api/management/quarters
-        // Vraća listu svih kvartala sortiranih od najnovijeg
+        // Vraća sve kvartale sa statistikama
         [HttpGet("quarters")]
-        public async Task<ActionResult> GetQuarters()
+        public async Task<ActionResult> GetAllQuarters()
         {
             var quarters = await _context.Quarters
                 .OrderByDescending(q => q.Year)
                 .ThenByDescending(q => q.QuarterNumber)
-                .Select(q => new
-                {
-                    q.Id,
-                    q.Year,
-                    q.QuarterNumber,
-                    QuarterName = $"Q{q.QuarterNumber} {q.Year}",
-                    q.StartDate,
-                    q.EndDate,
-                    q.IsActive,
-                    q.IsLocked,
-                    // Broj evaluacija za ovaj kvartal
-                    TotalEvaluations = _context.Evaluations.Count(e => e.QuarterId == q.Id),
-                    CompletedEvaluations = _context.Evaluations.Count(e => e.QuarterId == q.Id && e.IsCompleted)
-                })
                 .ToListAsync();
 
-            return Ok(quarters);
+            var result = new List<object>();
+
+            foreach (var quarter in quarters)
+            {
+                var evaluations = await _context.Evaluations
+                    .Where(e => e.QuarterId == quarter.Id)
+                    .ToListAsync();
+
+                result.Add(new
+                {
+                    quarter.Id,
+                    quarter.Year,
+                    quarter.QuarterNumber,
+                    QuarterName = $"Q{quarter.QuarterNumber} {quarter.Year}",
+                    quarter.StartDate,
+                    quarter.EndDate,
+                    quarter.IsActive,
+                    quarter.IsLocked,
+                    TotalEvaluations = evaluations.Count,
+                    CompletedEvaluations = evaluations.Count(e => e.IsCompleted),
+                    PendingEvaluations = evaluations.Count(e => !e.IsCompleted)
+                });
+            }
+
+            return Ok(result);
         }
     }
 }

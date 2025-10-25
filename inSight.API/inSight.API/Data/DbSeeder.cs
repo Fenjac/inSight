@@ -53,118 +53,69 @@ namespace inSight.API.Data
             var qaRole = jobRoles.First(r => r.Name == "QA");
             var appRole = jobRoles.First(r => r.Name == "Application Engineer");
 
-            // 3. KREIRAJ RANKS (za Developer, QA, Application Engineer)
+            // 3. KREIRAJ RANKS (23 ranga za svaku od 3 role = 69 total)
             var ranks = new List<Rank>();
 
-            // Praktikant ranks (P1-P3)
+            // Praktikant (P1-P3)
             for (int i = 1; i <= 3; i++)
             {
-                foreach (var role in jobRoles)
-                {
-                    ranks.Add(new Rank
-                    {
-                        RoleId = role.Id,
-                        Code = $"P{i}",
-                        Name = $"Praktikant {i}",
-                        MinSalary = 30000 + (i * 5000),
-                        MaxSalary = 40000 + (i * 5000),
-                        MinScore = 1.0m + (i * 0.5m),
-                        MaxScore = 1.5m + (i * 0.5m),
-                        OrderIndex = i
-                    });
-                }
+                ranks.Add(new Rank { RoleId = devRole.Id, Code = $"P{i}", Name = $"Praktikant {i}", MinSalary = 30000 + (i * 5000), MaxSalary = 35000 + (i * 5000), MinScore = 0, MaxScore = 0, OrderIndex = i });
+                ranks.Add(new Rank { RoleId = qaRole.Id, Code = $"P{i}", Name = $"Praktikant {i}", MinSalary = 30000 + (i * 5000), MaxSalary = 35000 + (i * 5000), MinScore = 0, MaxScore = 0, OrderIndex = i });
+                ranks.Add(new Rank { RoleId = appRole.Id, Code = $"P{i}", Name = $"Praktikant {i}", MinSalary = 30000 + (i * 5000), MaxSalary = 35000 + (i * 5000), MinScore = 0, MaxScore = 0, OrderIndex = i });
             }
 
-            // Junior ranks (J1-J6)
+            // Junior (J1-J6)
             for (int i = 1; i <= 6; i++)
             {
-                foreach (var role in jobRoles)
-                {
-                    ranks.Add(new Rank
-                    {
-                        RoleId = role.Id,
-                        Code = $"J{i}",
-                        Name = $"Junior {i}",
-                        MinSalary = 50000 + (i * 5000),
-                        MaxSalary = 60000 + (i * 5000),
-                        MinScore = 2.0m + (i * 0.3m),
-                        MaxScore = 2.3m + (i * 0.3m),
-                        OrderIndex = 10 + i
-                    });
-                }
+                ranks.Add(new Rank { RoleId = devRole.Id, Code = $"J{i}", Name = $"Junior {i}", MinSalary = 50000 + (i * 10000), MaxSalary = 60000 + (i * 10000), MinScore = 0, MaxScore = 0, OrderIndex = 3 + i });
+                ranks.Add(new Rank { RoleId = qaRole.Id, Code = $"J{i}", Name = $"Junior {i}", MinSalary = 50000 + (i * 10000), MaxSalary = 60000 + (i * 10000), MinScore = 0, MaxScore = 0, OrderIndex = 3 + i });
+                ranks.Add(new Rank { RoleId = appRole.Id, Code = $"J{i}", Name = $"Junior {i}", MinSalary = 50000 + (i * 10000), MaxSalary = 60000 + (i * 10000), MinScore = 0, MaxScore = 0, OrderIndex = 3 + i });
             }
 
-            // Medior ranks (M1-M6)
+            // Medior (M1-M6)
             for (int i = 1; i <= 6; i++)
             {
-                foreach (var role in jobRoles)
-                {
-                    ranks.Add(new Rank
-                    {
-                        RoleId = role.Id,
-                        Code = $"M{i}",
-                        Name = $"Medior {i}",
-                        MinSalary = 80000 + (i * 8000),
-                        MaxSalary = 90000 + (i * 8000),
-                        MinScore = 3.0m + (i * 0.2m),
-                        MaxScore = 3.2m + (i * 0.2m),
-                        OrderIndex = 20 + i
-                    });
-                }
+                ranks.Add(new Rank { RoleId = devRole.Id, Code = $"M{i}", Name = $"Medior {i}", MinSalary = 120000 + (i * 15000), MaxSalary = 135000 + (i * 15000), MinScore = 0, MaxScore = 0, OrderIndex = 9 + i });
+                ranks.Add(new Rank { RoleId = qaRole.Id, Code = $"M{i}", Name = $"Medior {i}", MinSalary = 120000 + (i * 15000), MaxSalary = 135000 + (i * 15000), MinScore = 0, MaxScore = 0, OrderIndex = 9 + i });
+                ranks.Add(new Rank { RoleId = appRole.Id, Code = $"M{i}", Name = $"Medior {i}", MinSalary = 120000 + (i * 15000), MaxSalary = 135000 + (i * 15000), MinScore = 0, MaxScore = 0, OrderIndex = 9 + i });
             }
 
-            // Senior ranks (S1-S6)
+            // Senior (S1-S6)
             for (int i = 1; i <= 6; i++)
             {
-                foreach (var role in jobRoles)
-                {
-                    ranks.Add(new Rank
-                    {
-                        RoleId = role.Id,
-                        Code = $"S{i}",
-                        Name = $"Senior {i}",
-                        MinSalary = 120000 + (i * 10000),
-                        MaxSalary = 135000 + (i * 10000),
-                        MinScore = 4.0m + (i * 0.15m),
-                        MaxScore = 4.15m + (i * 0.15m),
-                        OrderIndex = 30 + i
-                    });
-                }
+                ranks.Add(new Rank { RoleId = devRole.Id, Code = $"S{i}", Name = $"Senior {i}", MinSalary = 220000 + (i * 20000), MaxSalary = 240000 + (i * 20000), MinScore = 0, MaxScore = 0, OrderIndex = 15 + i });
+                ranks.Add(new Rank { RoleId = qaRole.Id, Code = $"S{i}", Name = $"Senior {i}", MinSalary = 220000 + (i * 20000), MaxSalary = 240000 + (i * 20000), MinScore = 0, MaxScore = 0, OrderIndex = 15 + i });
+                ranks.Add(new Rank { RoleId = appRole.Id, Code = $"S{i}", Name = $"Senior {i}", MinSalary = 220000 + (i * 20000), MaxSalary = 240000 + (i * 20000), MinScore = 0, MaxScore = 0, OrderIndex = 15 + i });
             }
 
-            // Expert ranks (E1-E3)
+            // Expert (E1-E3)
             for (int i = 1; i <= 3; i++)
             {
-                foreach (var role in jobRoles)
-                {
-                    ranks.Add(new Rank
-                    {
-                        RoleId = role.Id,
-                        Code = $"E{i}",
-                        Name = $"Expert {i}",
-                        MinSalary = 180000 + (i * 15000),
-                        MaxSalary = 200000 + (i * 15000),
-                        MinScore = 4.7m + (i * 0.1m),
-                        MaxScore = 4.8m + (i * 0.1m),
-                        OrderIndex = 40 + i
-                    });
-                }
+                ranks.Add(new Rank { RoleId = devRole.Id, Code = $"E{i}", Name = $"Expert {i}", MinSalary = 350000 + (i * 30000), MaxSalary = 380000 + (i * 30000), MinScore = 0, MaxScore = 0, OrderIndex = 21 + i });
+                ranks.Add(new Rank { RoleId = qaRole.Id, Code = $"E{i}", Name = $"Expert {i}", MinSalary = 350000 + (i * 30000), MaxSalary = 380000 + (i * 30000), MinScore = 0, MaxScore = 0, OrderIndex = 21 + i });
+                ranks.Add(new Rank { RoleId = appRole.Id, Code = $"E{i}", Name = $"Expert {i}", MinSalary = 350000 + (i * 30000), MaxSalary = 380000 + (i * 30000), MinScore = 0, MaxScore = 0, OrderIndex = 21 + i });
             }
 
             await context.Ranks.AddRangeAsync(ranks);
             await context.SaveChangesAsync();
 
-            // 4. KREIRAJ TIMOVE - 8 timova
+            // Helper function za dobijanje ranga
+            Rank GetRank(string code, Guid roleId)
+            {
+                return ranks.First(r => r.Code == code && r.RoleId == roleId);
+            }
+
+            // 4. KREIRAJ TIMOVE
             var teams = new List<Team>
             {
                 new Team { Name = "Backend", Description = "Backend development team" },
-                new Team { Name = "Backend Boomerang", Description = "Backend Boomerang team" },
+                new Team { Name = "Backend Boomerang", Description = "Backend boomerang team" },
                 new Team { Name = "Frontend", Description = "Frontend development team" },
-                new Team { Name = "Frontend Boomerang", Description = "Frontend Boomerang team" },
-                new Team { Name = "QA", Description = "Quality Assurance team" },
-                new Team { Name = "Application", Description = "Application development team" },
-                new Team { Name = "DevOps", Description = "DevOps team" },
-                new Team { Name = "AI", Description = "AI/ML team" }
+                new Team { Name = "Frontend Boomerang", Description = "Frontend boomerang team" },
+                new Team { Name = "QA", Description = "Quality assurance team" },
+                new Team { Name = "Application", Description = "Application engineering team" },
+                new Team { Name = "DevOps", Description = "DevOps and infrastructure team" },
+                new Team { Name = "AI", Description = "AI and machine learning team" }
             };
             await context.Teams.AddRangeAsync(teams);
             await context.SaveChangesAsync();
@@ -203,7 +154,7 @@ namespace inSight.API.Data
             await context.Quarters.AddRangeAsync(quarters);
             await context.SaveChangesAsync();
 
-            // 6. KREIRAJ MANAGEMENT
+            // 6. KREIRAJ MANAGEMENT (CEO, CTO, HR)
             var ceo = new User
             {
                 FirstName = "Marko",
@@ -237,41 +188,8 @@ namespace inSight.API.Data
             await context.Users.AddRangeAsync(new[] { ceo, cto, hr });
             await context.SaveChangesAsync();
 
-            // 7. KREIRAJ ZAPOSLENE iz Excel liste
+            // 7. KREIRAJ ZAPOSLENE (TEAM LEADS + EMPLOYEES)
             var employees = new List<User>();
-
-            // Helper funkcija za pronalazak ranga
-            Rank GetRank(string rankCode, Guid roleId)
-            {
-                return ranks.First(r => r.Code == rankCode && r.RoleId == roleId);
-            }
-
-            // DEVOPS TIM (2 zaposlena) - Lead: Apatović Aleksandar
-            employees.Add(new User
-            {
-                FirstName = "Aleksandar",
-                LastName = "Apatović",
-                Email = "aapatovic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = teamLeadRole.Id, // TEAM LEAD
-                RoleId = devRole.Id,
-                CurrentRankId = GetRank("M1", devRole.Id).Id,
-                TeamId = devopsTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Marko",
-                LastName = "Apatović",
-                Email = "mapatovic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = devRole.Id,
-                CurrentRankId = GetRank("J3", devRole.Id).Id,
-                TeamId = devopsTeam.Id,
-                IsActive = true
-            });
 
             // BACKEND TIM - Lead: Sabo Robert
             employees.Add(new User
@@ -282,16 +200,16 @@ namespace inSight.API.Data
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = teamLeadRole.Id, // TEAM LEAD
                 RoleId = devRole.Id,
-                CurrentRankId = GetRank("S1", devRole.Id).Id,
+                CurrentRankId = GetRank("S3", devRole.Id).Id,
                 TeamId = backendTeam.Id,
                 IsActive = true
             });
 
             employees.Add(new User
             {
-                FirstName = "Tomislav",
-                LastName = "Kralj",
-                Email = "tkralj@industrial-it.software",
+                FirstName = "Miloš",
+                LastName = "Božić",
+                Email = "mbozic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = employeeRole.Id,
                 RoleId = devRole.Id,
@@ -302,22 +220,22 @@ namespace inSight.API.Data
 
             employees.Add(new User
             {
-                FirstName = "Aleksa",
-                LastName = "Rokvić",
-                Email = "arokvic@industrial-it.software",
+                FirstName = "Kristina",
+                LastName = "Vulić",
+                Email = "kvulic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = employeeRole.Id,
                 RoleId = devRole.Id,
-                CurrentRankId = GetRank("M1", devRole.Id).Id,
+                CurrentRankId = GetRank("J4", devRole.Id).Id,
                 TeamId = backendTeam.Id,
                 IsActive = true
             });
 
             employees.Add(new User
             {
-                FirstName = "Igor",
-                LastName = "Stojanović",
-                Email = "istojanovic@industrial-it.software",
+                FirstName = "Petar",
+                LastName = "Lakić",
+                Email = "plakic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = employeeRole.Id,
                 RoleId = devRole.Id,
@@ -328,26 +246,13 @@ namespace inSight.API.Data
 
             employees.Add(new User
             {
-                FirstName = "Lazar",
-                LastName = "Stojčević",
-                Email = "lstojcevic@industrial-it.software",
+                FirstName = "Srđan",
+                LastName = "Vidović",
+                Email = "svidovic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = employeeRole.Id,
                 RoleId = devRole.Id,
-                CurrentRankId = GetRank("M3", devRole.Id).Id,
-                TeamId = backendTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Stefan",
-                LastName = "Vasić",
-                Email = "svasic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = devRole.Id,
-                CurrentRankId = GetRank("S4", devRole.Id).Id,
+                CurrentRankId = GetRank("S1", devRole.Id).Id,
                 TeamId = backendTeam.Id,
                 IsActive = true
             });
@@ -361,42 +266,16 @@ namespace inSight.API.Data
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = teamLeadRole.Id, // TEAM LEAD
                 RoleId = devRole.Id,
-                CurrentRankId = GetRank("S2", devRole.Id).Id,
+                CurrentRankId = GetRank("M4", devRole.Id).Id,
                 TeamId = backendBoomerangTeam.Id,
                 IsActive = true
             });
 
             employees.Add(new User
             {
-                FirstName = "Jovana",
-                LastName = "Nukić",
-                Email = "jnukic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = devRole.Id,
-                CurrentRankId = GetRank("M3", devRole.Id).Id,
-                TeamId = backendBoomerangTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Miloš",
-                LastName = "Obradović",
-                Email = "mobradovic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = devRole.Id,
-                CurrentRankId = GetRank("J4", devRole.Id).Id,
-                TeamId = backendBoomerangTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Đorđe",
-                LastName = "Stanisavljević",
-                Email = "djstanisavljevic@industrial-it.software",
+                FirstName = "Bogdan",
+                LastName = "Marković",
+                Email = "bmarkovic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = employeeRole.Id,
                 RoleId = devRole.Id,
@@ -405,135 +284,16 @@ namespace inSight.API.Data
                 IsActive = true
             });
 
-            // AI TIM - Lead: Babić Jela
             employees.Add(new User
             {
-                FirstName = "Jela",
-                LastName = "Babić",
-                Email = "jbabic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = teamLeadRole.Id, // TEAM LEAD
-                RoleId = devRole.Id,
-                CurrentRankId = GetRank("S1", devRole.Id).Id,
-                TeamId = aiTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Iva",
-                LastName = "Đerić",
-                Email = "idjeric@industrial-it.software",
+                FirstName = "Nemanja",
+                LastName = "Pavlović",
+                Email = "npavlovic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = employeeRole.Id,
                 RoleId = devRole.Id,
-                CurrentRankId = GetRank("P2", devRole.Id).Id,
-                TeamId = aiTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Aleksa",
-                LastName = "Naglić",
-                Email = "anaglic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = devRole.Id,
-                CurrentRankId = GetRank("P1", devRole.Id).Id,
-                TeamId = aiTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Manojlo",
-                LastName = "Novković",
-                Email = "mnovkovic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = devRole.Id,
-                CurrentRankId = GetRank("P1", devRole.Id).Id,
-                TeamId = aiTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Anja",
-                LastName = "Pantović",
-                Email = "apantovic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = devRole.Id,
-                CurrentRankId = GetRank("S1", devRole.Id).Id,
-                TeamId = aiTeam.Id,
-                IsActive = true
-            });
-
-            // QA TIM - Lead: Zimonjić Marko
-            employees.Add(new User
-            {
-                FirstName = "Marko",
-                LastName = "Zimonjić",
-                Email = "mzimonjic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = teamLeadRole.Id, // TEAM LEAD
-                RoleId = qaRole.Id,
-                CurrentRankId = GetRank("J5", qaRole.Id).Id,
-                TeamId = qaTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Smiljana",
-                LastName = "Beodranskih",
-                Email = "sbeodranskih@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = qaRole.Id,
-                CurrentRankId = GetRank("J4", qaRole.Id).Id,
-                TeamId = qaTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Slobodan",
-                LastName = "Blagojev",
-                Email = "sblagojev@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = qaRole.Id,
-                CurrentRankId = GetRank("P1", qaRole.Id).Id,
-                TeamId = qaTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Marko",
-                LastName = "Mitrović",
-                Email = "mmitrovic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = qaRole.Id,
-                CurrentRankId = GetRank("J4", qaRole.Id).Id,
-                TeamId = qaTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Dragan",
-                LastName = "Nikolić",
-                Email = "dnikolic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
-                RoleId = qaRole.Id,
-                CurrentRankId = GetRank("J2", qaRole.Id).Id,
-                TeamId = qaTeam.Id,
+                CurrentRankId = GetRank("M1", devRole.Id).Id,
+                TeamId = backendBoomerangTeam.Id,
                 IsActive = true
             });
 
@@ -545,30 +305,17 @@ namespace inSight.API.Data
                 Email = "dmatic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = teamLeadRole.Id, // TEAM LEAD
-                RoleId = qaRole.Id,
-                CurrentRankId = GetRank("S4", qaRole.Id).Id,
-                TeamId = frontendTeam.Id,
-                IsActive = true
-            });
-
-            employees.Add(new User
-            {
-                FirstName = "Mihailo",
-                LastName = "Jeremić",
-                Email = "mjeremic@industrial-it.software",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
-                SystemRoleId = employeeRole.Id,
                 RoleId = devRole.Id,
-                CurrentRankId = GetRank("P2", devRole.Id).Id,
+                CurrentRankId = GetRank("S2", devRole.Id).Id,
                 TeamId = frontendTeam.Id,
                 IsActive = true
             });
 
             employees.Add(new User
             {
-                FirstName = "Milica",
-                LastName = "Koval",
-                Email = "mkoval@industrial-it.software",
+                FirstName = "Miloš",
+                LastName = "Antić",
+                Email = "mantic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = employeeRole.Id,
                 RoleId = devRole.Id,
@@ -579,26 +326,52 @@ namespace inSight.API.Data
 
             employees.Add(new User
             {
-                FirstName = "Andrej",
-                LastName = "Lazić",
-                Email = "alazic@industrial-it.software",
+                FirstName = "Nikola",
+                LastName = "Birovljević",
+                Email = "nbirovljevic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = employeeRole.Id,
                 RoleId = devRole.Id,
-                CurrentRankId = GetRank("J3", devRole.Id).Id,
+                CurrentRankId = GetRank("J5", devRole.Id).Id,
                 TeamId = frontendTeam.Id,
                 IsActive = true
             });
 
             employees.Add(new User
             {
-                FirstName = "Ognjen",
-                LastName = "Rodić",
-                Email = "orodic@industrial-it.software",
+                FirstName = "Milan",
+                LastName = "Živanović",
+                Email = "mzivanovic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = employeeRole.Id,
                 RoleId = devRole.Id,
-                CurrentRankId = GetRank("J1", devRole.Id).Id,
+                CurrentRankId = GetRank("M2", devRole.Id).Id,
+                TeamId = frontendTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Stefan",
+                LastName = "Gavrilović",
+                Email = "sgavrilovic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("J6", devRole.Id).Id,
+                TeamId = frontendTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Jana",
+                LastName = "Knežević",
+                Email = "jknezevic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("S1", devRole.Id).Id,
                 TeamId = frontendTeam.Id,
                 IsActive = true
             });
@@ -612,7 +385,7 @@ namespace inSight.API.Data
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = teamLeadRole.Id, // TEAM LEAD
                 RoleId = devRole.Id,
-                CurrentRankId = GetRank("S2", devRole.Id).Id,
+                CurrentRankId = GetRank("M6", devRole.Id).Id,
                 TeamId = frontendBoomerangTeam.Id,
                 IsActive = true
             });
@@ -620,13 +393,185 @@ namespace inSight.API.Data
             employees.Add(new User
             {
                 FirstName = "Aleksa",
-                LastName = "Dmitrović",
-                Email = "admitrovic@industrial-it.software",
+                LastName = "Drašković",
+                Email = "adraskovic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("J2", devRole.Id).Id,
+                TeamId = frontendBoomerangTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Mihailo",
+                LastName = "Gaćeša",
+                Email = "mgacesa@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("M3", devRole.Id).Id,
+                TeamId = frontendBoomerangTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Ranko",
+                LastName = "Glišović",
+                Email = "rglisovic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("J1", devRole.Id).Id,
+                TeamId = frontendBoomerangTeam.Id,
+                IsActive = true
+            });
+
+            // DEVOPS TIM - Lead: Apatović Aleksandar
+            employees.Add(new User
+            {
+                FirstName = "Aleksandar",
+                LastName = "Apatović",
+                Email = "aapatovic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = teamLeadRole.Id, // TEAM LEAD
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("S4", devRole.Id).Id,
+                TeamId = devopsTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Lazar",
+                LastName = "Ranković",
+                Email = "lrankovic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("M4", devRole.Id).Id,
+                TeamId = devopsTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Zoran",
+                LastName = "Pavkov",
+                Email = "zpavkov@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("S1", devRole.Id).Id,
+                TeamId = devopsTeam.Id,
+                IsActive = true
+            });
+
+            // AI TIM - Lead: Babić Jela
+            employees.Add(new User
+            {
+                FirstName = "Jela",
+                LastName = "Babić",
+                Email = "jbabic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = teamLeadRole.Id, // TEAM LEAD
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("S5", devRole.Id).Id,
+                TeamId = aiTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Nikola",
+                LastName = "Jovanović",
+                Email = "njovanovic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("M6", devRole.Id).Id,
+                TeamId = aiTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Marija",
+                LastName = "Stanković",
+                Email = "mstankovic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = devRole.Id,
+                CurrentRankId = GetRank("J4", devRole.Id).Id,
+                TeamId = aiTeam.Id,
+                IsActive = true
+            });
+
+            // QA TIM - Lead: Zimonjić Marko
+            employees.Add(new User
+            {
+                FirstName = "Marko",
+                LastName = "Zimonjić",
+                Email = "mzimonjic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = teamLeadRole.Id, // TEAM LEAD
+                RoleId = qaRole.Id,
+                CurrentRankId = GetRank("M4", qaRole.Id).Id,
+                TeamId = qaTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Ana",
+                LastName = "Petrović",
+                Email = "apetrovic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = qaRole.Id,
+                CurrentRankId = GetRank("J3", qaRole.Id).Id,
+                TeamId = qaTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Igor",
+                LastName = "Nikolić",
+                Email = "inikolic@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = qaRole.Id,
+                CurrentRankId = GetRank("M2", qaRole.Id).Id,
+                TeamId = qaTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Jovana",
+                LastName = "Marić",
+                Email = "jmaric@industrial-it.software",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+                SystemRoleId = employeeRole.Id,
+                RoleId = qaRole.Id,
+                CurrentRankId = GetRank("J1", qaRole.Id).Id,
+                TeamId = qaTeam.Id,
+                IsActive = true
+            });
+
+            employees.Add(new User
+            {
+                FirstName = "Stefan",
+                LastName = "Đorđević",
+                Email = "sdjordjevic@industrial-it.software",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
                 SystemRoleId = employeeRole.Id,
                 RoleId = qaRole.Id,
                 CurrentRankId = GetRank("P1", qaRole.Id).Id,
-                TeamId = frontendBoomerangTeam.Id,
+                TeamId = frontendBoomerangTeam.Id, // Neki QA su u drugim timovima
                 IsActive = true
             });
 
@@ -700,7 +645,8 @@ namespace inSight.API.Data
 
             // 9. KREIRAJ EVALUATION CATEGORIES I QUESTIONS
             await SeedEvaluationQuestionsAsync(context);
-            // 10. KREIRAJ EVALUACIJE za oba kvartala
+
+            // 10. KREIRAJ EVALUACIJE SA ODGOVORIMA za oba kvartala
             await SeedEvaluationsAsync(context, quarters, employees);
 
             Console.WriteLine("✅ Baza je uspešno popunjena podacima!");
@@ -822,63 +768,281 @@ namespace inSight.API.Data
 
         private static async Task SeedEvaluationsAsync(ApplicationDbContext context, List<Quarter> quarters, List<User> employees)
         {
+            Console.WriteLine("📝 Kreiram evaluacije sa odgovorima...");
+
+            var q3 = quarters.First(q => q.QuarterNumber == 3 && q.Year == 2024);
+            var q4 = quarters.First(q => q.QuarterNumber == 4 && q.Year == 2024);
+
+            // Dohvati sve pitanja po tipu upitnika
+            var devQuestions = await context.EvaluationQuestions
+                .Include(q => q.Category)
+                .Where(q => q.Category.QuestionnaireType == QuestionnaireType.DEV)
+                .ToListAsync();
+
+            var qaQuestions = await context.EvaluationQuestions
+                .Include(q => q.Category)
+                .Where(q => q.Category.QuestionnaireType == QuestionnaireType.QA)
+                .ToListAsync();
+
+            var appQuestions = await context.EvaluationQuestions
+                .Include(q => q.Category)
+                .Where(q => q.Category.QuestionnaireType == QuestionnaireType.APP)
+                .ToListAsync();
+
+            var teamLeadQuestions = await context.EvaluationQuestions
+                .Include(q => q.Category)
+                .Where(q => q.Category.QuestionnaireType == QuestionnaireType.TeamLead)
+                .ToListAsync();
+
+            var random = new Random(42); // Fixed seed za konzistentne rezultate
+
+            // Dohvati Team Leads i Employees
+            var teamLeads = employees.Where(e => e.SystemRole?.Name == "TeamLead").ToList();
+            var regularEmployees = employees.Where(e => e.SystemRole?.Name == "Employee").ToList();
+
             var evaluations = new List<Evaluation>();
+            var allAnswers = new List<EvaluationAnswer>();
 
-            // Za svaki kvartal
-            foreach (var quarter in quarters)
+            // =====================================================
+            // Q3 2024 - POTPUNO ZAVRŠEN KVARTAL (100% completed)
+            // =====================================================
+
+            Console.WriteLine($"   Kreiram evaluacije za Q3 2024 (potpuno završen)...");
+
+            foreach (var employee in regularEmployees)
             {
-                // Uzmi sve Team Lead-ove
-                var teamLeads = employees.Where(e => e.SystemRoleId != null &&
-                    context.SystemRoles.Any(sr => sr.Id == e.SystemRoleId && sr.Name == "TeamLead")).ToList();
+                // Pronađi Team Lead-a za ovog zaposlenog
+                var teamLead = teamLeads.FirstOrDefault(tl => tl.TeamId == employee.TeamId);
 
-                // Za svakog Team Lead-a, kreiraj evaluacije za sve članove njegovog tima
-                foreach (var teamLead in teamLeads)
+                if (teamLead != null)
                 {
-                    // Pronađi sve članove tima ovog Team Lead-a
-                    var teamMembers = employees.Where(e =>
-                        e.TeamId == teamLead.TeamId &&
-                        e.Id != teamLead.Id).ToList();
-
-                    foreach (var member in teamMembers)
+                    // 1. LEAD → EMPLOYEE evaluacija (ZAVRŠENA)
+                    var leadToEmpEval = new Evaluation
                     {
-                        // Team Lead ocenjuje člana tima
-                        var questionnaireType = member.RoleId != null ?
-                            (context.Roles.First(r => r.Id == member.RoleId).Name switch
-                            {
-                                "Developer" => QuestionnaireType.DEV,
-                                "QA" => QuestionnaireType.QA,
-                                "Application Engineer" => QuestionnaireType.APP,
-                                _ => QuestionnaireType.DEV
-                            }) : QuestionnaireType.DEV;
+                        Id = Guid.NewGuid(),
+                        QuarterId = q3.Id,
+                        EvaluatedUserId = employee.Id,
+                        EvaluatorUserId = teamLead.Id,
+                        EvaluationType = EvaluationType.LeadToEmployee,
+                        QuestionnaireType = GetQuestionnaireTypeForRole(employee.Role?.Name),
+                        IsCompleted = true,
+                        CompletedAt = q3.EndDate.AddDays(-random.Next(1, 15)), // Završeno unutar kvartala
+                        CreatedAt = q3.StartDate.AddDays(1),
+                        UpdatedAt = q3.EndDate.AddDays(-random.Next(1, 15))
+                    };
 
-                        evaluations.Add(new Evaluation
-                        {
-                            QuarterId = quarter.Id,
-                            EvaluatedUserId = member.Id,
-                            EvaluatorUserId = teamLead.Id,
-                            EvaluationType = EvaluationType.LeadToEmployee,
-                            QuestionnaireType = questionnaireType,
-                            IsCompleted = false
-                        });
+                    evaluations.Add(leadToEmpEval);
 
-                        // Član tima ocenjuje Team Lead-a
-                        evaluations.Add(new Evaluation
-                        {
-                            QuarterId = quarter.Id,
-                            EvaluatedUserId = teamLead.Id,
-                            EvaluatorUserId = member.Id,
-                            EvaluationType = EvaluationType.EmployeeToLead,
-                            QuestionnaireType = QuestionnaireType.TeamLead,
-                            IsCompleted = false
-                        });
+                    // Dodaj odgovore za ovu evaluaciju
+                    var questions = GetQuestionsForType(leadToEmpEval.QuestionnaireType,
+                        devQuestions, qaQuestions, appQuestions, teamLeadQuestions);
+
+                    var answers = CreateAnswersForEvaluation(leadToEmpEval.Id, questions, random);
+                    allAnswers.AddRange(answers);
+
+                    // Postavi OverallScore kao prosek
+                    leadToEmpEval.OverallScore = (decimal)answers.Average(a => a.Score);
+
+                    // 2. EMPLOYEE → LEAD evaluacija (ZAVRŠENA)
+                    var empToLeadEval = new Evaluation
+                    {
+                        Id = Guid.NewGuid(),
+                        QuarterId = q3.Id,
+                        EvaluatedUserId = teamLead.Id,
+                        EvaluatorUserId = employee.Id,
+                        EvaluationType = EvaluationType.EmployeeToLead,
+                        QuestionnaireType = QuestionnaireType.TeamLead,
+                        IsCompleted = true,
+                        CompletedAt = q3.EndDate.AddDays(-random.Next(1, 15)),
+                        CreatedAt = q3.StartDate.AddDays(1),
+                        UpdatedAt = q3.EndDate.AddDays(-random.Next(1, 15))
+                    };
+
+                    evaluations.Add(empToLeadEval);
+
+                    var leadAnswers = CreateAnswersForEvaluation(empToLeadEval.Id, teamLeadQuestions, random);
+                    allAnswers.AddRange(leadAnswers);
+                    empToLeadEval.OverallScore = (decimal)leadAnswers.Average(a => a.Score);
+                }
+            }
+
+            // =====================================================
+            // Q4 2024 - AKTIVAN KVARTAL (50% completed, 50% in progress)
+            // =====================================================
+
+            Console.WriteLine($"   Kreiram evaluacije za Q4 2024 (aktivan, delimično završen)...");
+
+            int completedCount = 0;
+            int totalQ4 = regularEmployees.Count * 2; // Lead→Emp + Emp→Lead
+
+            foreach (var employee in regularEmployees)
+            {
+                var teamLead = teamLeads.FirstOrDefault(tl => tl.TeamId == employee.TeamId);
+
+                if (teamLead != null)
+                {
+                    bool shouldComplete = completedCount < totalQ4 / 2; // 50% će biti završeno
+
+                    // 1. LEAD → EMPLOYEE evaluacija
+                    var leadToEmpEval = new Evaluation
+                    {
+                        Id = Guid.NewGuid(),
+                        QuarterId = q4.Id,
+                        EvaluatedUserId = employee.Id,
+                        EvaluatorUserId = teamLead.Id,
+                        EvaluationType = EvaluationType.LeadToEmployee,
+                        QuestionnaireType = GetQuestionnaireTypeForRole(employee.Role?.Name),
+                        IsCompleted = shouldComplete,
+                        CreatedAt = q4.StartDate.AddDays(1)
+                    };
+
+                    if (shouldComplete)
+                    {
+                        leadToEmpEval.CompletedAt = DateTime.UtcNow.AddDays(-random.Next(1, 7));
+                        leadToEmpEval.UpdatedAt = leadToEmpEval.CompletedAt;
+
+                        var questions = GetQuestionsForType(leadToEmpEval.QuestionnaireType,
+                            devQuestions, qaQuestions, appQuestions, teamLeadQuestions);
+                        var answers = CreateAnswersForEvaluation(leadToEmpEval.Id, questions, random);
+                        allAnswers.AddRange(answers);
+                        leadToEmpEval.OverallScore = (decimal)answers.Average(a => a.Score);
+                        completedCount++;
                     }
+
+                    evaluations.Add(leadToEmpEval);
+
+                    // 2. EMPLOYEE → LEAD evaluacija
+                    shouldComplete = completedCount < totalQ4 / 2;
+
+                    var empToLeadEval = new Evaluation
+                    {
+                        Id = Guid.NewGuid(),
+                        QuarterId = q4.Id,
+                        EvaluatedUserId = teamLead.Id,
+                        EvaluatorUserId = employee.Id,
+                        EvaluationType = EvaluationType.EmployeeToLead,
+                        QuestionnaireType = QuestionnaireType.TeamLead,
+                        IsCompleted = shouldComplete,
+                        CreatedAt = q4.StartDate.AddDays(1)
+                    };
+
+                    if (shouldComplete)
+                    {
+                        empToLeadEval.CompletedAt = DateTime.UtcNow.AddDays(-random.Next(1, 7));
+                        empToLeadEval.UpdatedAt = empToLeadEval.CompletedAt;
+
+                        var leadAnswers = CreateAnswersForEvaluation(empToLeadEval.Id, teamLeadQuestions, random);
+                        allAnswers.AddRange(leadAnswers);
+                        empToLeadEval.OverallScore = (decimal)leadAnswers.Average(a => a.Score);
+                        completedCount++;
+                    }
+
+                    evaluations.Add(empToLeadEval);
                 }
             }
 
             await context.Evaluations.AddRangeAsync(evaluations);
+            await context.EvaluationAnswers.AddRangeAsync(allAnswers);
             await context.SaveChangesAsync();
 
-            Console.WriteLine($"   - {evaluations.Count} evaluations created");
+            Console.WriteLine($"   ✅ Kreirano {evaluations.Count} evaluacija:");
+            Console.WriteLine($"      - Q3 2024: {evaluations.Count(e => e.QuarterId == q3.Id)} evaluacija (100% završeno)");
+            Console.WriteLine($"      - Q4 2024: {evaluations.Count(e => e.QuarterId == q4.Id)} evaluacija (~50% završeno)");
+            Console.WriteLine($"   ✅ Kreirano {allAnswers.Count} odgovora na pitanja");
+        }
+
+        private static QuestionnaireType GetQuestionnaireTypeForRole(string? roleName)
+        {
+            return roleName switch
+            {
+                "Developer" => QuestionnaireType.DEV,
+                "QA" => QuestionnaireType.QA,
+                "Application Engineer" => QuestionnaireType.APP,
+                _ => QuestionnaireType.DEV
+            };
+        }
+
+        private static List<EvaluationQuestion> GetQuestionsForType(
+            QuestionnaireType type,
+            List<EvaluationQuestion> devQ,
+            List<EvaluationQuestion> qaQ,
+            List<EvaluationQuestion> appQ,
+            List<EvaluationQuestion> leadQ)
+        {
+            return type switch
+            {
+                QuestionnaireType.DEV => devQ,
+                QuestionnaireType.QA => qaQ,
+                QuestionnaireType.APP => appQ,
+                QuestionnaireType.TeamLead => leadQ,
+                _ => devQ
+            };
+        }
+
+        private static List<EvaluationAnswer> CreateAnswersForEvaluation(
+            Guid evaluationId,
+            List<EvaluationQuestion> questions,
+            Random random)
+        {
+            var answers = new List<EvaluationAnswer>();
+
+            foreach (var question in questions)
+            {
+                // Generiši realistične ocene sa težinom ka višim ocenama (3-5)
+                int score = GenerateRealisticScore(random);
+
+                var answer = new EvaluationAnswer
+                {
+                    Id = Guid.NewGuid(),
+                    EvaluationId = evaluationId,
+                    QuestionId = question.Id,
+                    Score = score,
+                    Comment = score != 3 ? GenerateComment(score, random) : null, // Komentar samo ako nije 3
+                    CreatedAt = DateTime.UtcNow
+                };
+
+                answers.Add(answer);
+            }
+
+            return answers;
+        }
+
+        private static int GenerateRealisticScore(Random random)
+        {
+            // Težine za ocene: većina 3-4, nešto 5, retko 1-2
+            var distribution = new[] { 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5 };
+            return distribution[random.Next(distribution.Length)];
+        }
+
+        private static string? GenerateComment(int score, Random random)
+        {
+            var positiveComments = new[]
+            {
+                "Odličan rad, nastaviti u istom pravcu.",
+                "Pokazuje izuzetne veštine i posvećenost.",
+                "Vrlo dobar učinak, mali prostor za poboljšanje.",
+                "Konstantno ispunjava i premašuje očekivanja.",
+                "Odlična timska saradnja."
+            };
+
+            var negativeComments = new[]
+            {
+                "Potrebno je više fokusa na detalje.",
+                "Postoji prostor za poboljšanje u ovoj oblasti.",
+                "Potrebna dodatna obuka ili mentorstvo.",
+                "Treba raditi na boljoj komunikaciji sa timom.",
+                "Očekujemo veći napredak u narednom periodu."
+            };
+
+            return score switch
+            {
+                5 => positiveComments[random.Next(positiveComments.Length)],
+                4 => positiveComments[random.Next(positiveComments.Length)],
+                3 => null, // Neutralno, bez komentara
+                2 => negativeComments[random.Next(negativeComments.Length)],
+                1 => negativeComments[random.Next(negativeComments.Length)],
+                _ => null
+            };
         }
     }
 }
