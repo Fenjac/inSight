@@ -18,9 +18,6 @@ namespace inSight.API.Models
 
         public bool IsActive { get; set; } = true;
 
-        // Ranks for this role
-        public ICollection<Rank> Ranks { get; set; } = new List<Rank>();
-
         // Users with this role
         public ICollection<User> Users { get; set; } = new List<User>();
 

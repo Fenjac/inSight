@@ -10,10 +10,6 @@ namespace inSight.API.Models
         [Key]
         public Guid Id { get; set; }
 
-        // Role za koju se odnosi ovaj rang
-        public Guid RoleId { get; set; }
-        public Role Role { get; set; } = null!;
-
         [Required]
         [MaxLength(10)]
         public string Code { get; set; } = string.Empty; // P1, J1, M1, S1, E1, etc.
@@ -31,13 +27,6 @@ namespace inSight.API.Models
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal MaxSalary { get; set; }
-
-        // Score thresholds (bodovni pragovi)
-        [Column(TypeName = "decimal(5,2)")]
-        public decimal MinScore { get; set; } // Minimum score za ovaj rang
-
-        [Column(TypeName = "decimal(5,2)")]
-        public decimal MaxScore { get; set; } // Maximum score za ovaj rang
 
         // Order for sorting
         public int OrderIndex { get; set; }

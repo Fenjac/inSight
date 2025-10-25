@@ -38,8 +38,9 @@ using (var scope = app.Services.CreateScope())
         // Primeni migracije
         context.Database.Migrate();
 
-        // Pozovi statiËku metodu direktno
-        await DbSeeder.SeedAsync(context);
+        // Always use PRODUCTION seeder (DbSeederTest has been removed)
+        Console.WriteLine("üè≠ Using PRODUCTION seeder (lookup tables only)");
+        await DbSeederProduction.SeedAsync(context);
     }
     catch (Exception ex)
     {

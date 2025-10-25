@@ -1,0 +1,37 @@
+﻿Prezime i ime,rang,email,nadredjeni,tim,leader,inicijalno,Q2 2024,Q2 2024 bonus,Q3 2024,Q3 2024 bonus,Q4 2024,Q4 2024 bonus,Q1 2025,Q1 2025 bonus,Q2 2025,Q2 2025 bonus,Q3 2025,Q3 2025 bonus
+Apatović Aleksandar,M1,aapatovic@industrial-it.software,Basarić Milica  ,Devops,da,125,19,-,17,5,20,5,17,5,19,8,18,6
+Apatović Marko,J3,mapatovic@industrial-it.software,Sabo Robert  ,Backend,ne,45,13,2,13,5,13,9,13,4,11,4,14,2
+Babić Jela,S1,jbabic@industrial-it.software,nema,AI,da,415,11,-,13,3,8,3,16,8,10,8,15,2
+Basarić Milica  ,S2,mbasaric@industrial-it.software,nema,Backend Boomerang,da,415,19,-,16,3,17,5,17,8,17,3,17,3
+Beodranski Smiljana  ,J4,sbeodranski@industrial-it.software,Zimonjić Marko,QA,ne,120,-,-,-,-,-,-,-,-,12,0,14,3
+Blagojev Slobodan,P1,sblagojev@industrial-it.software,Zimonjić Marko,QA,ne,0,-,-,-,-,-,-,14,0,19,2,17,23
+Bosić Jović Mila,J6,mbosicjovic@industrial-it.software,Zimonjić Marko,QA,ne,160,-,-,-,-,20,0,10,3,-,-,-,-
+Dmitrović Aleksa ,P1,admitrovic@industrial-it.software,Babić Jela,AI,ne,0,-,-,-,-,-,-,7,3,13,17,14,6
+Đerić Iva  ,P2,idjeric@industrial-it.software,Babić Jela,AI,ne,20,-,-,-,-,0,0,4,0,7,9,5,0
+Glušac Dušan  ,S2,dglusac@industrial-it.software,nema,Frontend Boomerang,da,440,0,20,15,3,16,6,12,8,15,5,12,2
+Hrabovski Andrea,S1,ahrabovski@industrial-it.software,Babić Jela,AI,ne,440,-,-,-,-,20,0,7,3,-,-,-,-
+Jeremić Mihailo,P1,mjeremic@industrial-it.software,Matić Dušica  ,Frontend,ne,0,-,-,-,-,-,-,-,-,-,-,10,2
+Kokotović Željka   ,J2,zkokotovic@industrial-it.software,Savanović Živojin  ,Application,ne,60,-,-,-,-,-,-,13,7,17,6,17,4
+Kopanja Anđela,J1,akopanja@industrial-it.software,Savanović Živojin  ,Application,ne,40,-,-,-,-,-,-,13,7,14,6,16,4
+Kovačević Mirjana,J5,mkovacevic@industrial-it.software,Zimonjić Marko,QA,ne,120,-,-,-,-,10,0,14,0,-,-,-,-
+Koval Milica  ,M5,mkoval@industrial-it.software,Glušac Dušan  ,Frontend Boomerang,ne,320,0,20,11,5,8,0,11,5,8,0,10,2
+Kralj Tomislav  ,M2,tkralj@industrial-it.software,Basarić Milica  ,Backend Boomerang,ne,200,17,,13,5,16,4,13,4,14,2,14,2
+Lazić Andrej,J3,alazic@industrial-it.software,Matić Dušica  ,Frontend,ne,40,0,20,13,0,16,3,14,3,14,2,16,4
+Matić Dušica  ,S4,dmatic@industrial-it.software,nema,Frontend,da,560,0,20,17,3,19,3,20,7,16,8,17,3
+Mitrović Marko ,J4,mmitrovic@industrial-it.software,Zimonjić Marko,QA,ne,120,-,-,-,-,-,-,-,-,11,0,14,2
+Naglić Aleksa ,P1,anaglic@industrial-it.software,Savanović Živojin  ,Application,ne,0,-,-,-,-,-,-,-,-,13,0,16,31
+Nikolić Dragana,J2,dnikolic@industrial-it.software,Zimonjić Marko,QA,ne,60,-,-,-,-,-,-,17,5,17,4,16,3
+Novković Manojlo ,P1,mnovkovic@industrial-it.software,Basarić Milica  ,Backend Boomerang ,ne,0,-,-,-,-,-,-,-,-,20,0,17,23
+Nukić Jovana ,M3,jnukic@industrial-it.software,Glušac Dušan  ,Frontend Boomerang,ne,240,0,20,7,0,6,0,8,3,5,0,7,3
+Obradović Miloš,J4,mobradovic@industrial-it.software,Sabo Robert  ,Devops,ne,120,-,-,-,-,-,-,-,-,-,-,14,6
+Pantović Anja  ,S1,apantovic@industrial-it.software,Babić Jela,AI,ne,440,-,-,-,-,-,-,10,7,19,6,16,2
+Rodić Ognjen  ,J1,orodic@industrial-it.software,Matić Dušica  ,Frontend,ne,0,0,20,7,0,13,3,11,6,8,3,7,2
+Rokvić Aleksa,M1,arokvic@industrial-it.software,Sabo Robert  ,Backend,ne,200,-,-,-,-,-,-,-,-,-,-,10,2
+Sabo Robert  ,E2,rsabo@industrial-it.software,nema,Backend,da,800,15,-,12,5,15,5,15,5,14,4,13,5
+Savanović Živojin  ,M5,zsavanovic@industrial-it.software,nema,Application,da,320,-,-,-,-,20,20,16,4,17,3,16,4
+Stanisavljević Đorđe,J3,djstanisavljevic@industrial-it.software,Matić Dušica  ,Frontend,ne,40,0,20,14,3,14,3,10,3,11,2,13,7
+Stojanović Igor,M3,istojanovic@industrial-it.software,Sabo Robert  ,Backend,ne,280,-,-,-,-,-,-,-,-,-,-,8,2
+Stojčević Lazar,M3,lstojcevic@industrial-it.software,Sabo Robert  ,Backend,ne,280,-,-,-,-,-,-,-,-,-,-,13,3
+Vasić Stefan,S4,svasic@industrial-it.software,Sabo Robert  ,Backend,ne,610,17,-,12,0,10,5,12,3,12,3,14,3
+Zgrđa Ivan,M6,izgrdja@industrial-it.software,Savanović Živojin  ,Application,ne,400,-,-,-,-,-,-,7,0,11,1,11,2
+Zimonjić Marko,S1,mzimonjic@industrial-it.software,nema,QA,da,400,-,-,-,-,20,20,15,3,16,5,17,2

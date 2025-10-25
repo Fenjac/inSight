@@ -38,6 +38,7 @@ namespace inSight.API.Data
         // History and configuration
         public DbSet<RankHistory> RankHistories { get; set; }
         public DbSet<QuarterlyScore> QuarterlyScores { get; set; }
+        public DbSet<RankScoreThreshold> RankScoreThresholds { get; set; }
         public DbSet<RankConfiguration> RankConfigurations { get; set; }
         public DbSet<EmailNotification> EmailNotifications { get; set; }
 
@@ -98,13 +99,6 @@ namespace inSight.API.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             // ===== RANK RELATIONSHIPS =====
-
-            // Rank -> Role
-            modelBuilder.Entity<Rank>()
-                .HasOne(r => r.Role)
-                .WithMany(r => r.Ranks)
-                .HasForeignKey(r => r.RoleId)
-                .OnDelete(DeleteBehavior.Restrict);
 
             // RankConfiguration -> Rank
             modelBuilder.Entity<RankConfiguration>()
@@ -229,7 +223,49 @@ namespace inSight.API.Data
                 .IsUnique();
 
             modelBuilder.Entity<Rank>()
-                .HasIndex(r => new { r.RoleId, r.Code })
+                .HasIndex(r => r.Code)
+                .IsUnique();
+
+            // ===== RANK SCORE THRESHOLD RELATIONSHIPS =====
+
+            // RankScoreThreshold -> Rank
+            modelBuilder.Entity<RankScoreThreshold>()
+                .HasOne(rst => rst.Rank)
+                .WithMany()
+                .HasForeignKey(rst => rst.RankId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // RankScoreThreshold -> Role
+            modelBuilder.Entity<RankScoreThreshold>()
+                .HasOne(rst => rst.Role)
+                .WithMany()
+                .HasForeignKey(rst => rst.RoleId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Unique index for RankScoreThreshold (one threshold per rank-role combination)
+            modelBuilder.Entity<RankScoreThreshold>()
+                .HasIndex(rst => new { rst.RankId, rst.RoleId })
+                .IsUnique();
+
+            // ===== QUARTERLY SCORE RELATIONSHIPS =====
+
+            // QuarterlyScore -> User
+            modelBuilder.Entity<QuarterlyScore>()
+                .HasOne(qs => qs.User)
+                .WithMany(u => u.QuarterlyScores)
+                .HasForeignKey(qs => qs.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // QuarterlyScore -> Quarter
+            modelBuilder.Entity<QuarterlyScore>()
+                .HasOne(qs => qs.Quarter)
+                .WithMany()
+                .HasForeignKey(qs => qs.QuarterId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Unique index for QuarterlyScore (one score per user per quarter)
+            modelBuilder.Entity<QuarterlyScore>()
+                .HasIndex(qs => new { qs.UserId, qs.QuarterId })
                 .IsUnique();
         }
     }

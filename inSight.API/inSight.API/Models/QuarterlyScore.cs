@@ -10,28 +10,62 @@ namespace inSight.API.Models
 
         [Required]
         public Guid UserId { get; set; }
+
+        [ForeignKey(nameof(UserId))]
         public User User { get; set; } = null!;
 
         [Required]
         public Guid QuarterId { get; set; }
+
+        [ForeignKey(nameof(QuarterId))]
         public Quarter Quarter { get; set; } = null!;
 
+        /// <summary>
+        /// Base score from evaluations for this quarter
+        /// For regular employees: score from their evaluation
+        /// For leaders: average score from evaluations they received
+        /// </summary>
         [Required]
+        public int BaseScore { get; set; }
+
+        /// <summary>
+        /// Average score for leaders (calculated from evaluations where they were evaluated)
+        /// Null for non-leaders
+        /// </summary>
         [Column(TypeName = "decimal(5,2)")]
-        public decimal EvaluationScore { get; set; } // Bodovi iz upitnika
+        public decimal? LeaderAverageScore { get; set; }
 
-        [Column(TypeName = "decimal(5,2)")]
-        public decimal ManagementBonusPoints { get; set; } = 0; // Bonus od managementa
+        /// <summary>
+        /// Bonus points added by management for this quarter
+        /// </summary>
+        public int ManagementBonusScore { get; set; } = 0;
 
-        [Column(TypeName = "decimal(5,2)")]
-        public decimal TotalScore { get; set; } // Ukupno
+        /// <summary>
+        /// Reason/explanation for management bonus
+        /// </summary>
+        [MaxLength(500)]
+        public string? ManagementBonusReason { get; set; }
 
-        [MaxLength(10)]
-        public string? AssignedRank { get; set; } // Rang dodeljen za taj kvartal
+        /// <summary>
+        /// Total score for this quarter (BaseScore + ManagementBonusScore)
+        /// </summary>
+        [Required]
+        public int TotalScore { get; set; }
 
-        public string? ManagementComment { get; set; } // Komentar od managementa uz bonus
+        /// <summary>
+        /// Optional: Foreign key to the main evaluation if this score is derived from one
+        /// </summary>
+        public Guid? EvaluationId { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+        /// <summary>
+        /// Calculate total score from base and bonus
+        /// </summary>
+        public void CalculateTotalScore()
+        {
+            TotalScore = BaseScore + ManagementBonusScore;
+        }
     }
 }

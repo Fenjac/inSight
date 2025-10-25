@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using inSight.API.Data;
 
@@ -11,9 +12,11 @@ using inSight.API.Data;
 namespace inSight.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251025193121_AddQuarterlyScoreFieldsAndRankThresholds")]
+    partial class AddQuarterlyScoreFieldsAndRankThresholds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -501,8 +504,14 @@ namespace inSight.API.Migrations
                     b.Property<decimal>("MaxSalary")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("MaxScore")
+                        .HasColumnType("decimal(5,2)");
+
                     b.Property<decimal>("MinSalary")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MinScore")
+                        .HasColumnType("decimal(5,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -512,9 +521,12 @@ namespace inSight.API.Migrations
                     b.Property<int>("OrderIndex")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("Code")
+                    b.HasIndex("RoleId", "Code")
                         .IsUnique();
 
                     b.ToTable("Ranks");
@@ -1022,6 +1034,17 @@ namespace inSight.API.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("inSight.API.Models.Rank", b =>
+                {
+                    b.HasOne("inSight.API.Models.Role", "Role")
+                        .WithMany("Ranks")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("inSight.API.Models.RankConfiguration", b =>
                 {
                     b.HasOne("inSight.API.Models.Rank", "Rank")
@@ -1181,6 +1204,8 @@ namespace inSight.API.Migrations
 
             modelBuilder.Entity("inSight.API.Models.Role", b =>
                 {
+                    b.Navigation("Ranks");
+
                     b.Navigation("Users");
                 });
 

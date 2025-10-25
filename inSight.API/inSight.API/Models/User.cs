@@ -43,6 +43,18 @@ namespace inSight.API.Models
 
         public bool IsActive { get; set; } = true;
 
+        // Score tracking
+        /// <summary>
+        /// Starting score when the employee joined or system was initialized
+        /// </summary>
+        public int StartingScore { get; set; } = 0;
+
+        /// <summary>
+        /// Current total accumulated score (StartingScore + Sum of all QuarterlyScores.TotalScore)
+        /// This is cached/computed for performance
+        /// </summary>
+        public int CurrentTotalScore { get; set; } = 0;
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
 
@@ -63,5 +75,8 @@ namespace inSight.API.Models
 
         // Teams I lead (ako sam Team Lead)
         public ICollection<Team> TeamsLed { get; set; } = new List<Team>();
+
+        // Quarterly scores
+        public ICollection<QuarterlyScore> QuarterlyScores { get; set; } = new List<QuarterlyScore>();
     }
 }
