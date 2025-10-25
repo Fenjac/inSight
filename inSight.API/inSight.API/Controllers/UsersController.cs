@@ -585,5 +585,39 @@ namespace inSight.API.Controllers
                 CompanyAverage = companyAverage
             });
         }
+
+        // GET: api/users/{id}/quarterly-scores
+        [HttpGet("{id}/quarterly-scores")]
+        public async Task<ActionResult> GetUserQuarterlyScores(Guid id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+                return NotFound(new { message = "Korisnik nije pronađen." });
+
+            var quarterlyScores = await _context.QuarterlyScores
+                .Where(qs => qs.UserId == id)
+                .Include(qs => qs.Quarter)
+                .OrderByDescending(qs => qs.Quarter.Year)
+                .ThenByDescending(qs => qs.Quarter.QuarterNumber)
+                .Select(qs => new
+                {
+                    id = qs.Id,
+                    userId = qs.UserId,
+                    quarter = qs.Quarter.QuarterNumber,
+                    year = qs.Quarter.Year,
+                    quarterLabel = $"Q{qs.Quarter.QuarterNumber} {qs.Quarter.Year}",
+                    baseScore = qs.BaseScore,
+                    leaderAverageScore = qs.LeaderAverageScore,
+                    managementBonusScore = qs.ManagementBonusScore,
+                    managementBonusReason = qs.ManagementBonusReason,
+                    totalScore = qs.TotalScore,
+                    evaluationId = qs.EvaluationId,
+                    createdAt = qs.CreatedAt,
+                    updatedAt = qs.UpdatedAt
+                })
+                .ToListAsync();
+
+            return Ok(quarterlyScores);
+        }
     }
 }
