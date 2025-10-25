@@ -13,8 +13,8 @@ namespace inSight.API.Models
         public Evaluation Evaluation { get; set; } = null!;
 
         [Required]
-        public Guid QuestionId { get; set; }
-        public EvaluationQuestion Question { get; set; } = null!;
+        public Guid QuestionInstanceId { get; set; }
+        public EvaluationQuestionInstance QuestionInstance { get; set; } = null!;
 
         [Required]
         [Range(1, 5)]

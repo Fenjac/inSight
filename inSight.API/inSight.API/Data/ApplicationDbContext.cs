@@ -25,6 +25,15 @@ namespace inSight.API.Data
         // Evaluation entities
         public DbSet<Quarter> Quarters { get; set; }
         public DbSet<Evaluation> Evaluations { get; set; }
+
+        // Evaluation templates (master copies)
+        public DbSet<EvaluationCategoryTemplate> EvaluationCategoryTemplates { get; set; }
+        public DbSet<EvaluationQuestionTemplate> EvaluationQuestionTemplates { get; set; }
+
+        // Evaluation instances (copies for each evaluation)
+        public DbSet<EvaluationQuestionInstance> EvaluationQuestionInstances { get; set; }
+
+        // Legacy evaluation entities (keeping for backward compatibility)
         public DbSet<EvaluationCategory> EvaluationCategories { get; set; }
         public DbSet<EvaluationQuestion> EvaluationQuestions { get; set; }
         public DbSet<EvaluationAnswer> EvaluationAnswers { get; set; }
@@ -152,6 +161,38 @@ namespace inSight.API.Data
                 .WithMany(p => p.EvaluationProjects)
                 .HasForeignKey(ep => ep.ProjectId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // ===== EVALUATION TEMPLATE RELATIONSHIPS =====
+
+            // EvaluationQuestionTemplate -> EvaluationCategoryTemplate
+            modelBuilder.Entity<EvaluationQuestionTemplate>()
+                .HasOne(qt => qt.CategoryTemplate)
+                .WithMany(ct => ct.Questions)
+                .HasForeignKey(qt => qt.CategoryTemplateId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // ===== EVALUATION INSTANCE RELATIONSHIPS =====
+
+            // EvaluationQuestionInstance -> Evaluation
+            modelBuilder.Entity<EvaluationQuestionInstance>()
+                .HasOne(qi => qi.Evaluation)
+                .WithMany(e => e.QuestionInstances)
+                .HasForeignKey(qi => qi.EvaluationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // EvaluationQuestionInstance -> EvaluationQuestionTemplate (optional)
+            modelBuilder.Entity<EvaluationQuestionInstance>()
+                .HasOne(qi => qi.TemplateQuestion)
+                .WithMany(tq => tq.QuestionInstances)
+                .HasForeignKey(qi => qi.TemplateQuestionId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // EvaluationAnswer -> EvaluationQuestionInstance (one-to-one)
+            modelBuilder.Entity<EvaluationAnswer>()
+                .HasOne(ea => ea.QuestionInstance)
+                .WithOne(qi => qi.Answer)
+                .HasForeignKey<EvaluationAnswer>(ea => ea.QuestionInstanceId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // ===== OTHER RELATIONSHIPS =====
 

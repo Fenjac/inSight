@@ -63,8 +63,7 @@ namespace inSight.API.Controllers
                 .Include(e => e.EvaluatedUser)
                 .Include(e => e.EvaluatorUser)
                 .Include(e => e.Answers)
-                    .ThenInclude(a => a.Question)
-                        .ThenInclude(q => q.Category)
+                    .ThenInclude(a => a.QuestionInstance)
                 .FirstOrDefaultAsync(e => e.Id == id);
 
             if (evaluation == null)
@@ -72,18 +71,21 @@ namespace inSight.API.Controllers
 
             // Grupiši pitanja po kategorijama
             var categories = evaluation.Answers
-                .GroupBy(a => a.Question.Category)
+                .GroupBy(a => new {
+                    CategoryName = a.QuestionInstance.CategoryName,
+                    CategoryOrderIndex = a.QuestionInstance.CategoryOrderIndex
+                })
                 .Select(g => new EvaluationCategoryDto
                 {
-                    CategoryId = g.Key.Id,
-                    CategoryName = g.Key.Name,
-                    OrderIndex = g.Key.OrderIndex,
-                    IsManagementOnly = g.Key.IsManagementOnly,
+                    CategoryId = Guid.Empty, // Instance doesn't have category ID
+                    CategoryName = g.Key.CategoryName,
+                    OrderIndex = g.Key.CategoryOrderIndex,
+                    IsManagementOnly = false, // TODO: Store this in instance if needed
                     Questions = g.Select(a => new EvaluationQuestionDto
                     {
-                        QuestionId = a.Question.Id,
-                        QuestionText = a.Question.QuestionText,
-                        OrderIndex = a.Question.OrderIndex,
+                        QuestionId = a.QuestionInstance.Id,
+                        QuestionText = a.QuestionInstance.QuestionText,
+                        OrderIndex = a.QuestionInstance.QuestionOrderIndex,
                         Score = a.Score,
                         Comment = a.Comment
                     }).OrderBy(q => q.OrderIndex).ToList()

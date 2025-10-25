@@ -1,0 +1,97 @@
+{
+  "member": "Željka Kokotović",
+  "leader": "Živojin Savanović",
+  "quarter": "Q3",
+  "year": 2025,
+  "average_score": 4.75,
+  "categories": [
+    {
+      "name": "Kvalitet odrađenog posla",
+      "score": 5,
+      "comment": null,
+      "questions": [
+        {
+          "text": "Koliko je zaposleni odgovoran i temeljan, koliko često se moraju dorađivati zadaci na kojima je zaposleni radio (ne uzima se u obzir usputna promjena formulacije zadatka)?",
+          "score": 5,
+          "comment": "Izuzetno odgovorna i temeljna za sve taskove koje radi. Taskovi se gotovo nikad ne vracaju. Ampere ekrani i sync procedura jedine negativne stvari, ali visoka ocjena zbog opsteg utiska"
+        },
+        {
+          "text": "Koliko su rješenja zadataka efikasna i optimizovana?",
+          "score": 5,
+          "comment": "Rjesenja zadataka veoma efikasna i optimizovana, vodi se racuna o buducim koracima i nadogradnji sistema"
+        },
+        {
+          "text": "Koliko zaposleni može da predvidi poteškoće i blokatore u izvršavanju zadataka prije početka rada na istom?",
+          "score": 5,
+          "comment": "Izuzetno, dovoljno iskustva da se kvalitetno estimiraju taskovi"
+        }
+      ]
+    },
+    {
+      "name": "Komunikacija i saradnja",
+      "score": 4,
+      "comment": null,
+      "questions": [
+        {
+          "text": "Koliko zaposleni redovno završava zadatke u predviđenom vremenskom periodu?",
+          "score": 4,
+          "comment": "U 90% +  slucajeva se ispostuje zavrsavanje zadataka"
+        },
+        {
+          "text": "Koliko je zaposleni precizan u proceni vremena potrebnog za završetak zadataka?",
+          "score": 4,
+          "comment": "Konstantan napredak, sa jedne strane neke stvari se precjene, neke se podcjene pa zbog svoje odgovornosti i karaktera radi prekovremeno (ne prijavljuje, ali se vidi) - sto je losa praksa za zaposlenog, tezimo da toga ne bude"
+        },
+        {
+          "text": "Kako ocenjujete sposobnost zaposlenog da efikasno upravlja svojim radnim rasporedom i prioritizuje zadatke?",
+          "score": 5,
+          "comment": "Izuzetno upravlja vremenom i prioritetima "
+        }
+      ]
+    },
+    {
+      "name": "Proaktivnost i inicijativa",
+      "score": 5,
+      "comment": null,
+      "questions": [
+        {
+          "text": "Koliko često zaposleni preuzima inicijativu u rešavanju problema ili unapređivanju procesa?",
+          "score": 5,
+          "comment": "Uvijek preuzima inicijativu, ne brinem kada preuzme nesto da radi"
+        },
+        {
+          "text": "Koliko je zaposleni inovativan u pronalaženju novih rešenja i poboljšanja?",
+          "score": 5,
+          "comment": "Kontinuirano predlaze nove nacine rjesenja, inovativnost u taskovima"
+        },
+        {
+          "text": "Kako ocenjujete predanost zaposlenog poslu i timu?",
+          "score": 5,
+          "comment": "Vrlo visoka posvecenost, kad obeca nesto to i ispuni pa makar na svoju stetu, za postovanje iako treba teziti da se ne desava"
+        }
+      ]
+    },
+    {
+      "name": "Profesionalni razvoj",
+      "score": 5,
+      "comment": null,
+      "questions": [
+        {
+          "text": "Koliko zaposleni doprinosi timskom radu i saradnji?",
+          "score": 5,
+          "comment": "Veoma doprinosi, odlicno hendlovanje mog odsustva"
+        },
+        {
+          "text": "Koliko je zaposleni otvoren za ideje i mišljenja drugih članova tima?",
+          "score": 5,
+          "comment": "Aktivno trazi i prihvata tudje misljenje"
+        },
+        {
+          "text": "Kako ocenjujete sposobnost zaposlenog da efikasno komunicira i radi u timu?",
+          "score": 5,
+          "comment": "Izuzetno, napredak na polju ostavljanja pisanih tragova i dokumentovanja rada"
+        }
+      ]
+    }
+  ]
+}

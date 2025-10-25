@@ -42,6 +42,7 @@ namespace inSight.API.Models
         public DateTime? UpdatedAt { get; set; }
 
         // Navigation properties
+        public ICollection<EvaluationQuestionInstance> QuestionInstances { get; set; } = new List<EvaluationQuestionInstance>();
         public ICollection<EvaluationAnswer> Answers { get; set; } = new List<EvaluationAnswer>();
         public ICollection<ManagementReview> ManagementReviews { get; set; } = new List<ManagementReview>();
 
